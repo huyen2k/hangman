@@ -8,6 +8,7 @@ int ran(int l, int r){
 }
 
 string chooseword(){
+    rng.seed(time(0));
     vector<string> word = {"happy", "sad", "tired", "bored", "good", "bad", "angry"};
     int num = ran(0, 6);
     return word[num];
@@ -15,14 +16,14 @@ string chooseword(){
 
 void rendergame(string guessword, int badguesscount){
     vector<string> render = {
-    " ---------------\n  |              \n  |              \n  |             \n  |             \n  |                 \n  |                \n-----",
-    " ---------------\n  |              |\n  |              \n  |             \n  |             \n  |                 \n  |                \n-----",
-    " ---------------\n  |              |\n  |              o\n  |             \n  |             \n  |                 \n  |                \n-----",
-    " ---------------\n  |              |\n  |              o\n  |              |\n  |             \n  |                 \n  |                \n-----",
-    " ---------------\n  |              |\n  |              o\n  |             /|\n  |             \n  |                 \n  |                \n-----",
-    " ---------------\n  |              |\n  |              o\n  |             /|\\n  |             \n  |                 \n  |                \n-----",
-    " ---------------\n  |              |\n  |              o\n  |             /|\\n  |             / \n  |                 \n  |                \n-----",
-    " ---------------\n  |              |\n  |              o\n  |             /|\\n  |             / \\n  |                 \n  |                \n-----"
+    " -----------------\n  |              \n  |              \n  |             \n  |             \n  |                 \n  |                \n-----",
+    " -----------------\n  |              |\n  |              \n  |             \n  |             \n  |                 \n  |                \n-----",
+    " -----------------\n  |              |\n  |              o\n  |             \n  |             \n  |                 \n  |                \n-----",
+    " -----------------\n  |              |\n  |              o\n  |              |\n  |             \n  |                 \n  |                \n-----",
+    " -----------------\n  |              |\n  |              o\n  |             /|\n  |             \n  |                 \n  |                \n-----",
+    " -----------------\n  |              |\n  |              o\n  |             /|\\ \n  |             \n  |                 \n  |                \n-----",
+    " -----------------\n  |              |\n  |              o\n  |             /|\\ \n  |             /  \n  |                 \n  |                \n-----",
+    " -----------------\n  |              |\n  |              o\n  |             /|\\ \n  |             / \\ \n  |                 \n  |                \n-----"
     };
     cout << render[badguesscount] << '\n';
     cout << "Secretword : " << guessword << '\n';
@@ -58,14 +59,14 @@ void gameplay(){
             cout << "Congratulations!\n";
             break;
         }
-        char guess = guess_in();
-        if(contain(secretword, guess))
-            update(guessword, secretword, guess);
-        else badguesscount ++;
         if(badguesscount == 7){
             cout << "You lose!\n";
             break;
         }
+        char guess = guess_in();
+        if(contain(secretword, guess))
+            update(guessword, secretword, guess);
+        else badguesscount ++;
     }while(1);
 }
 
