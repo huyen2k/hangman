@@ -1,4 +1,17 @@
 # depslib dependency file v1.0
-1708697571 source:f:\game sdl\hangman\main.cpp
+1709478476 source:f:\game sdl\hangman\main.cpp
 	<bits/stdc++.h>
+	"lib.h"
+
+1709478583 source:f:\game sdl\hangman\render.cpp
+	<iostream>
+	<string>
+	<vector>
+	"lib.h"
+
+1709474261 f:\game sdl\hangman\lib.h
+	<thread>
+	<chrono>
+	<string>
+	<iostream>
 

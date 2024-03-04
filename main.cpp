@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "lib.h"
 
 using namespace std;
 
@@ -9,24 +10,13 @@ int ran(int l, int r){
 
 string chooseword(){
     rng.seed(time(0));
-    vector<string> word = {"happy", "sad", "tired", "bored", "good", "bad", "angry"};
-    int num = ran(0, 6);
+    ifstream file("word.inp");
+    vector<string> word;
+    string s;
+    while(file >> s)
+        word.push_back(s);
+    int num = ran(0, word.size());
     return word[num];
-}
-
-void rendergame(string guessword, int badguesscount){
-    vector<string> render = {
-    " -----------------\n  |              \n  |              \n  |             \n  |             \n  |                 \n  |                \n-----",
-    " -----------------\n  |              |\n  |              \n  |             \n  |             \n  |                 \n  |                \n-----",
-    " -----------------\n  |              |\n  |              o\n  |             \n  |             \n  |                 \n  |                \n-----",
-    " -----------------\n  |              |\n  |              o\n  |              |\n  |             \n  |                 \n  |                \n-----",
-    " -----------------\n  |              |\n  |              o\n  |             /|\n  |             \n  |                 \n  |                \n-----",
-    " -----------------\n  |              |\n  |              o\n  |             /|\\ \n  |             \n  |                 \n  |                \n-----",
-    " -----------------\n  |              |\n  |              o\n  |             /|\\ \n  |             /  \n  |                 \n  |                \n-----",
-    " -----------------\n  |              |\n  |              o\n  |             /|\\ \n  |             / \\ \n  |                 \n  |                \n-----"
-    };
-    cout << render[badguesscount] << '\n';
-    cout << "Secretword : " << guessword << '\n';
 }
 
 char guess_in(){
@@ -55,13 +45,13 @@ void gameplay(){
     do{
         if (system("CLS")) system("clear");
         rendergame(guessword, badguesscount);
-        if(guessword == secretword) {
-            cout << "Congratulations!\n";
-            break;
+        if(guessword == secretword){
+            finalresult(1, badguesscount);
+            return;
         }
         if(badguesscount == 7){
-            cout << "You lose!\n";
-            break;
+            finalresult(0, badguesscount);
+            return;
         }
         char guess = guess_in();
         if(contain(secretword, guess))
@@ -70,8 +60,19 @@ void gameplay(){
     }while(1);
 }
 
+void multiplay(){
+    while(1){
+        gameplay();
+        cout << "Do you want to play again ?\n";
+        cout << "Yes - press 1           No - press 2\n";
+        int n;
+        cin >> n;
+        if(n == 2) break;
+    }
+}
+
 int main()
 {
-    gameplay();
+    multiplay();
     return 0;
 }
